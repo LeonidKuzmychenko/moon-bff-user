@@ -10,7 +10,7 @@ import java.util.Map;
 @RestController("/api/v1")
 public class MeController {
 
-    @GetMapping("/register")
+    @GetMapping("/me")
     public Map<String, Object> me(@AuthenticationPrincipal AuthUser user) {
 //        X-Auth-User-Id:
 //        X-Auth-User-Email:

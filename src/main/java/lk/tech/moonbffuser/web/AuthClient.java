@@ -2,12 +2,12 @@ package lk.tech.moonbffuser.web;
 
 import lk.tech.moonbffuser.dto.auth.*;
 import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
@@ -15,7 +15,7 @@ import java.util.Map;
 public interface AuthClient {
 
     @PostExchange("/auth/register")
-    Map<String, String> register(@RequestBody RegisterRequest request);
+    AuthUserResponse register(@RequestBody RegisterWithUserIdRequest request);
 
     @PostExchange("/auth/login")
     TokenResponse login(@RequestBody LoginRequest request);
@@ -28,11 +28,6 @@ public interface AuthClient {
 
     @PostExchange("/auth/logout-all")
     void logoutAll(
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization
-    );
-
-    @GetExchange("/auth/me")
-    UserResponse me(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization
     );
 
@@ -54,16 +49,8 @@ public interface AuthClient {
             @RequestBody ChangePasswordRequest request
     );
 
-    @GetExchange("/auth/health")
-    Map<String, String> health();
-
     @GetExchange("/user/profile")
     Map<String, String> getProfile(
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization
-    );
-
-    @GetExchange("/admin/dashboard")
-    Map<String, String> getDashboard(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization
     );
 }

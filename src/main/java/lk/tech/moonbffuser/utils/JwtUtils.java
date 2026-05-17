@@ -45,7 +45,8 @@ public class JwtUtils {
         return new AuthUser(
                 UUID.fromString(claims.get("authId", String.class)),
                 claims.getSubject(),
-                claims.get("role", String.class)
+                claims.get("role", String.class),
+                claims.get("dbId", Long.class)
         );
     }
 }

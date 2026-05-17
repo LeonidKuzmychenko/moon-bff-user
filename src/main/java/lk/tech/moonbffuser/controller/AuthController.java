@@ -1,7 +1,11 @@
 package lk.tech.moonbffuser.controller;
 
 import lk.tech.moonbffuser.dto.auth.*;
+import lk.tech.moonbffuser.dto.db.DbUser;
+import lk.tech.moonbffuser.dto.db.DbUserCreateRequest;
 import lk.tech.moonbffuser.web.AuthClient;
+import lk.tech.moonbffuser.web.DbClient;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,18 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/auth/api/v1")
+@AllArgsConstructor
 public class AuthController {
 
     private final AuthClient authClient;
-
-    public AuthController(AuthClient authClient) {
-        this.authClient = authClient;
-    }
+    private final DbClient dbClient;
 
     @PostMapping("/auth/register")
-    public Map<String, String> register(@RequestBody RegisterRequest request) {
-        return authClient.register(request);
+    public AuthUserResponse register(@RequestBody RegisterRequest registerRequest) {
+        DbUser user = dbClient.createUser();
+        RegisterWithUserIdRequest authRequest = new RegisterWithUserIdRequest(user.getId(), registerRequest.email(), registerRequest.password());
+        return authClient.register(authRequest);
     }
 
     @PostMapping("/auth/login")

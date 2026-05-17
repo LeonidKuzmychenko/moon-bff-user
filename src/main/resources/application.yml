@@ -8,4 +8,9 @@ spring:
 app:
   jwt:
     secret: v9y&E)H@McQfTjWnZr4u7x!A%D*G-KaNdRgUkXp2s5v8y/B?E(H+MbQeShVmYq}
-
+  minio-service:
+    url: http://localhost:8080
+  auth-service:
+    url: http://localhost:8383
+  db-service:
+    url: http://localhost:8181

@@ -8,8 +8,8 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 public class AuthUser {
-
     private final UUID authId;
     private final String email;
     private final String role;
+    private final Long dbId;
 }
