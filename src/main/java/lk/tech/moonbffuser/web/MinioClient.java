@@ -23,6 +23,6 @@ public interface MinioClient {
     @DeleteExchange("/tile")
     void deleteTile(@RequestParam("tileId") String tileId);
 
-    @GetExchange
+    @GetExchange("/atlas")
     Resource getAtlas(@RequestParam("atlasType") String atlasType);
 }
